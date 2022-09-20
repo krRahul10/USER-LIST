@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
+  add: {
     type: String,
     required: true,
   },
@@ -32,6 +32,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const user = new mongoose.model("users", userSchema);
+const users = new mongoose.model("users", userSchema);
 
-module.exports = user
+module.exports = users
