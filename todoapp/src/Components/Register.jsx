@@ -14,6 +14,7 @@ export const Register = () => {
     desc: "",
   });
 
+  const { name, email, age, phone, work, address, desc} = inputVal
   
 
   const handleChange = (e) => {
@@ -36,7 +37,7 @@ export const Register = () => {
             class="form-control"
             id="inputEmail4"
             name="name"
-            value={inputVal.name}
+            value={name}
             onChange={handleChange}
           />
         </div>
@@ -49,7 +50,7 @@ export const Register = () => {
             class="form-control"
             id="inputPassword4"
             name="email"
-            value={inputVal.email}
+            value={email}
             onChange={handleChange}
           />
         </div>
@@ -62,7 +63,7 @@ export const Register = () => {
             class="form-control"
             id="inputEmail4"
             name="age"
-            value={inputVal.age}
+            value={age}
             onChange={handleChange}
           />
         </div>
@@ -75,7 +76,7 @@ export const Register = () => {
             class="form-control"
             id="inputPassword4"
             name="phone"
-            value={inputVal.phone}
+            value={phone}
             onChange={handleChange}
           />
         </div>
@@ -88,7 +89,7 @@ export const Register = () => {
             class="form-control"
             id="inputEmail4"
             name="work"
-            value={inputVal.work}
+            value={work}
             onChange={handleChange}
           />
         </div>
@@ -101,7 +102,7 @@ export const Register = () => {
             class="form-control"
             id="inputEmail4"
             name="address"
-            value={inputVal.address}
+            value={address}
             onChange={handleChange}
           />
         </div>
@@ -112,7 +113,7 @@ export const Register = () => {
           {/* <input type="password" class="form-control" id="inputPassword4" /> */}
           <textarea
             name="desc"
-            value={inputVal.desc}
+            value={desc}
             onChange={handleChange}
           />
         </div>
