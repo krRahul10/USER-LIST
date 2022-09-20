@@ -1,7 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export const Register = () => {
+
+  const [inputVal, setInputVal] = useState({
+    name: "",
+    email: "",
+    age: "",
+    phone: "",
+    work: "",
+    address: "",
+    desc: "",
+  });
+
+  
+
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    const { name, value } = e.target;
+    setInputVal((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   return (
     <div className="container">
       <NavLink to="/">Home</NavLink>
@@ -10,44 +31,90 @@ export const Register = () => {
           <label for="inputEmail4" class="form-label">
             Name
           </label>
-          <input type="text" class="form-control" id="inputEmail4" />
+          <input
+            type="text"
+            class="form-control"
+            id="inputEmail4"
+            name="name"
+            value={inputVal.name}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">
             Email
           </label>
-          <input type="text" class="form-control" id="inputPassword4" />
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword4"
+            name="email"
+            value={inputVal.email}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">
             Age
           </label>
-          <input type="number" class="form-control" id="inputEmail4" />
+          <input
+            type="number"
+            class="form-control"
+            id="inputEmail4"
+            name="age"
+            value={inputVal.age}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">
             Phone
           </label>
-          <input type="number" class="form-control" id="inputPassword4" />
+          <input
+            type="number"
+            class="form-control"
+            id="inputPassword4"
+            name="phone"
+            value={inputVal.phone}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">
             Work
           </label>
-          <input type="text" class="form-control" id="inputEmail4" />
+          <input
+            type="text"
+            class="form-control"
+            id="inputEmail4"
+            name="work"
+            value={inputVal.work}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">
             Address
           </label>
-          <input type="text" class="form-control" id="inputEmail4" />
+          <input
+            type="text"
+            class="form-control"
+            id="inputEmail4"
+            name="address"
+            value={inputVal.address}
+            onChange={handleChange}
+          />
         </div>
         <div class="col-md-6">
           <label for="inputPassword4" class="form-label">
             Description
           </label>
           {/* <input type="password" class="form-control" id="inputPassword4" /> */}
-          <textarea />
+          <textarea
+            name="desc"
+            value={inputVal.desc}
+            onChange={handleChange}
+          />
         </div>
 
         <div class="col-12">
