@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export const Register = () => {
+export const Edit = () => {
   const [inputVal, setInputVal] = useState({
     name: "",
     email: "",
@@ -24,7 +23,9 @@ export const Register = () => {
   };
   return (
     <div className="container">
-      <NavLink to="/">Home</NavLink>
+      <h1>Edit Page</h1>
+      <NavLink to="/">Home 11</NavLink>
+
       <form class="row g-3">
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">
