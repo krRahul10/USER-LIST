@@ -6,12 +6,14 @@ const router = express.Router();
 //     console.log('connect')
 // })
 
+// 1*****************Register Request*********
+
 router.post("/register", async (req, res) => {
   // console.log(req.body)
   const { name, email, age, phone, work, add, desc } = req.body;
 
   if (!name || !email || !age || !phone || !work || !add || !desc) {
-    res.status(404).send("Please fill the data");
+    return res.status(404).json({error: "Please fill the data"});
   }
 
   try {
@@ -19,24 +21,35 @@ router.post("/register", async (req, res) => {
     console.log(preuser);
 
     if (preuser) {
-      res.status(404).send("This user is already present");
+      return res.status(404).json({error: "This user is already present"});
     } else {
       const adduser = new users({
-        name,
-        email,
-        age,
-        phone,
-        work,
-        add,
-        desc,
+        name, email, age, phone, work, add, desc,
       });
-      
+
       await adduser.save();
-      res.status(201).json(adduser);
+      res.status(201).json({ message: "user store successfully"});
       console.log(adduser);
     }
+  } catch (err) {
+    // res.status(404).json(error);
+    console.log("err",err)
+  }
+});
+
+// 2********Get Request *********
+
+router.get("/getdata", async (req, res) => {
+  try {
+
+    const userdata = await users.find();
+    res.status(201).json(userdata);
+    console.log(userdata);
+
   } catch (error) {
-    res.status(404).send(error);
+
+    res.status(404).json(error);
+
   }
 });
 

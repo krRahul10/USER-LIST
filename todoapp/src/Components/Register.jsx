@@ -9,11 +9,9 @@ export const Register = () => {
     age: "",
     phone: "",
     work: "",
-    address: "",
+    add: "",
     desc: "",
   });
-
-  const { name, email, age, phone, work, address, desc } = inputVal;
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -22,98 +20,132 @@ export const Register = () => {
       return { ...prev, [name]: value };
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, age, phone, work, add, desc } = inputVal;
+    const res = await fetch("/register",{
+      method: "POST",
+      headers: {
+        // "Content-Type": "application/json"
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name, email, age, phone, work, add, desc
+      }),
+    });
+
+    const data = await res.json();
+    console.log("data with frontend", data);
+
+    if (data.status === 404 || !data) {
+
+      console.log("error");
+      alert("error");
+
+    } else {
+
+      alert("data added successfully");
+      console.log("data added");
+
+    }
+  };
   return (
     <div className="container">
       <NavLink to="/">Home</NavLink>
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+      <form className="row g-3">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="name"
-            value={name}
+            value={inputVal.name}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Email
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputPassword4"
             name="email"
-            value={email}
+            value={inputVal.email}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Age
           </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="age"
-            value={age}
+            value={inputVal.age}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Phone
           </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="inputPassword4"
             name="phone"
-            value={phone}
+            value={inputVal.phone}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Work
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="work"
-            value={work}
+            value={inputVal.work}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Address
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
-            name="address"
-            value={address}
+            name="add"
+            value={inputVal.add}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Description
           </label>
-          <textarea name="desc" value={desc} onChange={handleChange} />
+          <textarea name="desc" value={inputVal.desc} onChange={handleChange} />
         </div>
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">
-            Sign in
+        <div className="col-12">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="btn btn-primary"
+          >
+            Submit
           </button>
         </div>
       </form>

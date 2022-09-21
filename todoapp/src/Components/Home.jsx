@@ -1,16 +1,55 @@
-import React from "react";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import React, { useState } from "react";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 export const Home = () => {
+
+  const [getuserdata, setUserdata] = useState([]);
+
+//data store hoga getuserdata ke ander check karlo
+
+  console.log("getuserdata", getuserdata);
+
+  // data fetch yaha hoga se backend
+  const getdata = async () => {
+    const res = await fetch("/getdata", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    console.log("data with frontend", data);
+
+    if (data.status === 404 || !data) {
+      console.log("error");
+      alert("error");
+    } else {
+      setUserdata(data);
+      console.log("get Data");
+    }
+  };
+
+  // fetch wala function useffect me call karo
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
   return (
     <div className="mt-5">
       <div className="container">
         <div className="add_btn mt-2">
-          <button className="btn btn-primary">ADD DATA</button>
+          <NavLink to="/register" className="btn btn-primary">
+            ADD DATA
+          </NavLink>
         </div>
-        <table class="table mt-3">
+        <table className="table mt-3">
           <thead>
             <tr className="table-dark">
               <th scope="col">id</th>
@@ -22,32 +61,26 @@ export const Home = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              {/* <td></td> */}
-              <td>@mdo</td>
-              <td>999999999</td>
-              <td className="d-flex justify-content-around">
-                <button className="btn btn-success"><RemoveRedEyeIcon/></button>
-                <button className="btn btn-primary"><BorderColorIcon/></button>
-                <button className="btn btn-danger"><DeleteForeverIcon/></button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              {/* <td></td> */}
-              <td>@mdo</td>
-              <td>999999999</td>
-              <td className="d-flex justify-content-around">
-                <button className="btn btn-success"><RemoveRedEyeIcon/></button>
-                <button className="btn btn-primary"><BorderColorIcon/></button>
-                <button className="btn btn-danger"><DeleteForeverIcon/></button>
-              </td>
-            </tr>
+            {getuserdata.map((elem, id) => (
+              <tr key={id}>
+                <th scope="row">{id + 1}</th>
+                <td>{elem.name}</td>
+                <td>{elem.email}</td>
+                <td>{elem.work}</td>
+                <td>{elem.phone}</td>
+                <td className="d-flex justify-content-around">
+                  <button className="btn btn-success">
+                    <RemoveRedEyeIcon />
+                  </button>
+                  <button className="btn btn-primary">
+                    <BorderColorIcon />
+                  </button>
+                  <button className="btn btn-danger">
+                    <DeleteForeverIcon />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

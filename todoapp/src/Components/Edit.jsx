@@ -26,94 +26,94 @@ export const Edit = () => {
       <h1>Edit Page</h1>
       <NavLink to="/">Home 11</NavLink>
 
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+      <form className="row g-3">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="name"
             value={name}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Email
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputPassword4"
             name="email"
             value={email}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Age
           </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="age"
             value={age}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Phone
           </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="inputPassword4"
             name="phone"
             value={phone}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Work
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="work"
             value={work}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputEmail4" className="form-label">
             Address
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputEmail4"
             name="address"
             value={address}
             onChange={handleChange}
           />
         </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">
+        <div className="col-md-6">
+          <label htmlFor="inputPassword4" className="form-label">
             Description
           </label>
           <textarea name="desc" value={desc} onChange={handleChange} />
         </div>
 
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">
+        <div className="col-12">
+          <button type="submit" className="btn btn-primary">
             Sign in
           </button>
         </div>
