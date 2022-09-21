@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate()
+
   const [inputVal, setInputVal] = useState({
     name: "",
     email: "",
@@ -46,7 +47,7 @@ export const Register = () => {
 
     } else {
 
-      alert("data added successfully");
+      // alert("data added successfully");
       console.log("data added");
       navigate('/')
 

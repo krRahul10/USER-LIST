@@ -7,7 +7,7 @@ export const Navbar = () => {
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
-            Navbar
+            CRUD APP
           </NavLink>
           <button
             className="navbar-toggler"
@@ -23,9 +23,9 @@ export const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                {/* <NavLink className="nav-link active" aria-current="page" to="/">
                   Home
-                </NavLink>
+                </NavLink> */}
               </li>
             </ul>
             <form className="d-flex" role="search">

@@ -9,7 +9,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import WorkIcon from "@mui/icons-material/Work";
 import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 export const Details = () => {
   // ye wo id h jo Hum URL me send karte h and useParam se isko get kr sakte h
@@ -17,7 +17,10 @@ export const Details = () => {
   console.log(id);
 
   const [getuserdata, setUserdata] = useState([]);
+
   console.log("details page", getuserdata);
+  const navigate = useNavigate();
+
   const getdata = async () => {
     const res = await fetch(`/getuser/${id}`, {
       method: "GET",
@@ -45,18 +48,40 @@ export const Details = () => {
     getdata();
   }, []);
 
+  const deleteUser = async (id) => {
+    const res2 = await fetch(`/deleteuser/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const deteledata = await res2.json();
+    console.log(deteledata);
+
+    if (res2.status === 422 || !deteledata) {
+      console.log("error");
+    } else {
+      console.warn("user delete successfully from details page");
+      // getdata();
+
+      navigate("/");
+    }
+  };
   return (
     <div className="container mt-3">
       <h1 style={{ fontWeight: 400 }}>Welcome Rahul Kumar</h1>
-      <Card sx={{ maxWidth: 600 }}>
+      <Card sx={{ maxWidth: 700 }}>
         <CardContent>
           <div className="add_btn">
             <NavLink to={`/edit/${getuserdata._id}`}>
-            <button className="btn btn-primary mx-2">
-              <CreateIcon />
-            </button>
+              <button className="btn btn-primary mx-2">
+                <CreateIcon />
+              </button>
             </NavLink>
-            <button className="btn btn-danger">
+            <button
+              className="btn btn-danger"
+              onClick={() => deleteUser(getuserdata._id)}
+            >
               <DeleteOutlined />
             </button>
           </div>

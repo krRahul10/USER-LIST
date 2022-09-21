@@ -6,22 +6,19 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
 export const Home = () => {
-
   const [getuserdata, setUserdata] = useState([]);
 
-//data store hoga getuserdata ke ander check karlo
+  //data store hoga getuserdata ke ander check karlo
 
   console.log("getuserdata", getuserdata);
 
   // data fetch yaha hoga se backend
   const getdata = async () => {
     const res = await fetch("/getdata", {
-
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-
     });
 
     const data = await res.json();
@@ -43,26 +40,27 @@ export const Home = () => {
     getdata();
   }, []);
 
-  const deleteUser = async( id ) => {
-const res2 = await fetch(`/deleteuser/${id}`, {
-  method:"DELETE",
-  headers: {
-    "Content-Type":"application/json"
-  },
-})
-const deteledata = await res2.json()
-console.log(deteledata)
+  const deleteUser = async (id) => {
+    const res2 = await fetch(`/deleteuser/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const deteledata = await res2.json();
+    console.log(deteledata);
 
-if( res2.status === 422 || !deteledata){
-  console.log("error")
-}
-else {
-  console.warn("user delete successfully")
-  getdata()
-}
-  }
+    if (res2.status === 422 || !deteledata) {
+      console.log("error");
+    } else {
+      console.warn("user delete successfully");
+      getdata();
+    }
+  };
 
   return (
+   <>
+   
     <div className="mt-5">
       <div className="container">
         <div className="add_btn mt-2">
@@ -90,14 +88,22 @@ else {
                 <td>{elem.work}</td>
                 <td>{elem.phone}</td>
                 <td className="d-flex justify-content-around">
-                  <NavLink to={`view/${elem._id}`}><button className="btn btn-success">
-                    <RemoveRedEyeIcon />
-                  </button></NavLink>
-                  
-                 <NavLink to={`edit/${elem._id}`}> <button className="btn btn-primary">
-                    <BorderColorIcon />
-                  </button></NavLink>
-                  <button className="btn btn-danger" onClick={()=> deleteUser(elem._id)}>
+                  <NavLink to={`view/${elem._id}`}>
+                    <button className="btn btn-success">
+                      <RemoveRedEyeIcon />
+                    </button>
+                  </NavLink>
+
+                  <NavLink to={`edit/${elem._id}`}>
+                    {" "}
+                    <button className="btn btn-primary">
+                      <BorderColorIcon />
+                    </button>
+                  </NavLink>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteUser(elem._id)}
+                  >
                     <DeleteForeverIcon />
                   </button>
                 </td>
@@ -107,5 +113,6 @@ else {
         </table>
       </div>
     </div>
+   </>
   );
 };
