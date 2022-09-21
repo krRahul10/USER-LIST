@@ -22,7 +22,7 @@ export const Details = () => {
   const navigate = useNavigate();
 
   const getdata = async () => {
-    const res = await fetch(`/getuser/${id}`, {
+    const res = await fetch(`https://crudapplication321.herokuapp.com/getuser/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const Details = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    const res2 = await fetch(`/deleteuser/${id}`, {
+    const res2 = await fetch(`https://crudapplication321.herokuapp.com/deleteuser/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

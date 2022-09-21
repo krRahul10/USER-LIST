@@ -14,7 +14,7 @@ export const Home = () => {
 
   // data fetch yaha hoga se backend
   const getdata = async () => {
-    const res = await fetch("/getdata", {
+    const res = await fetch("https://crudapplication321.herokuapp.com/getdata", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const Home = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    const res2 = await fetch(`/deleteuser/${id}`, {
+    const res2 = await fetch(`https://crudapplication321.herokuapp.com/deleteuser/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

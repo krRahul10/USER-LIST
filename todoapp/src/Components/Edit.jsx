@@ -31,7 +31,7 @@ export const Edit = () => {
   console.log(id);
 
   const getdata = async () => {
-    const res = await fetch(`/getuser/${id}`, {
+    const res = await fetch(`https://crudapplication321.herokuapp.com/getuser/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const Edit = () => {
     e.preventDefault();
 
     const {name, age, work, phone, desc,add, email} = inputVal
-    const res2 = await fetch(`/updateuser/${id}`, {
+    const res2 = await fetch(`https://crudapplication321.herokuapp.com/updateuser/${id}`, {
       method:"PATCH",
       headers:{
         "Content-Type":"application/json"

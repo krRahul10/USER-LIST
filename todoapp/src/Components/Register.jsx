@@ -26,7 +26,7 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, age, phone, work, add, desc } = inputVal;
-    const res = await fetch("/register",{
+    const res = await fetch("https://crudapplication321.herokuapp.com/register",{
       method: "POST",
       headers: {
         // "Content-Type": "application/json"
