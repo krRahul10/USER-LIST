@@ -58,16 +58,50 @@ router.get("/getuser/:id", async (req, res) => {
   try {
     console.log(req.params);
 
-    const { id } = req.params
-    const userindividual = await users.findById({_id: id})
+    const { id } = req.params;
+    const userindividual = await users.findById({ _id: id });
 
-    console.log(userindividual)
-    res.status(201).json(userindividual)
-
+    console.log(userindividual);
+    res.status(201).json(userindividual);
   } catch (err) {
     console.log(err);
-    res.status(422).json(err)
+    res.status(422).json(err);
   }
 });
 
+// 4***************Update single user API ***********
+
+router.patch("/updateuser/:id", async (req, res) => {
+  try {
+    //id of user which want to update
+    const { id } = req.params;
+
+    const updateuser = await users.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    console.log(updateuser);
+    res.status(201).json(updateuser);
+  } catch (err) {
+    res.status(422).json(err);
+  }
+});
+
+// 5******** delete user with id ******
+
+router.delete("/deleteuser/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleteuser = await users.findByIdAndDelete({ _id: id });
+
+    console.log(deleteuser);
+
+    res.status(201).json(deleteuser);
+
+  } catch (err) {
+    
+    res.status(422).json(err);
+
+  }
+});
 module.exports = router;

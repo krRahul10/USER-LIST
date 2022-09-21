@@ -43,6 +43,25 @@ export const Home = () => {
     getdata();
   }, []);
 
+  const deleteUser = async( id ) => {
+const res2 = await fetch(`/deleteuser/${id}`, {
+  method:"DELETE",
+  headers: {
+    "Content-Type":"application/json"
+  },
+})
+const deteledata = await res2.json()
+console.log(deteledata)
+
+if( res2.status === 422 || !deteledata){
+  console.log("error")
+}
+else {
+  console.warn("user delete successfully")
+  getdata()
+}
+  }
+
   return (
     <div className="mt-5">
       <div className="container">
@@ -75,10 +94,10 @@ export const Home = () => {
                     <RemoveRedEyeIcon />
                   </button></NavLink>
                   
-                  <button className="btn btn-primary">
+                 <NavLink to={`edit/${elem._id}`}> <button className="btn btn-primary">
                     <BorderColorIcon />
-                  </button>
-                  <button className="btn btn-danger">
+                  </button></NavLink>
+                  <button className="btn btn-danger" onClick={()=> deleteUser(elem._id)}>
                     <DeleteForeverIcon />
                   </button>
                 </td>

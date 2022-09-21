@@ -1,18 +1,23 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 export const Edit = () => {
+  // const [getuserdata, setUserdata] = useState([]);
+  // console.log("details page", getuserdata)
+
+  const nevigate = useNavigate()
+
   const [inputVal, setInputVal] = useState({
     name: "",
     email: "",
     age: "",
     phone: "",
     work: "",
-    address: "",
+    add: "",
     desc: "",
   });
 
-  const { name, email, age, phone, work, address, desc } = inputVal;
+  const { name, email, age, phone, work, add, desc } = inputVal;
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -20,6 +25,62 @@ export const Edit = () => {
     setInputVal((prev) => {
       return { ...prev, [name]: value };
     });
+  };
+
+  const { id } = useParams();
+  console.log(id);
+
+  const getdata = async () => {
+    const res = await fetch(`/getuser/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    console.log("data with frontend", data);
+
+    if (data.status === 422 || !data) {
+      console.log("error");
+      alert("error");
+    } else {
+      setInputVal(data);
+      console.log("get Data");
+    }
+  };
+
+  // fetch wala function useffect me call karo
+
+  useEffect(() => {
+    getdata();
+  }, []);
+
+  const updateuser = async (e) => {
+    e.preventDefault();
+
+    const {name, age, work, phone, desc,add, email} = inputVal
+    const res2 = await fetch(`/updateuser/${id}`, {
+      method:"PATCH",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        name,email,age,add,phone,desc,work
+      })
+
+    })
+    const data2 = await res2.json()
+    console.log(data2)
+
+    if(res2.status ===422 || !data2){
+      alert("fill the details")
+    }else {
+      alert("data added in edit")
+      nevigate('/')
+    }
+
   };
   return (
     <div className="container">
@@ -101,7 +162,7 @@ export const Edit = () => {
             className="form-control"
             id="inputEmail4"
             name="address"
-            value={address}
+            value={add}
             onChange={handleChange}
           />
         </div>
@@ -113,8 +174,12 @@ export const Edit = () => {
         </div>
 
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">
-            Sign in
+          <button
+            type="submit"
+            onClick={updateuser}
+            className="btn btn-warning"
+          >
+            Update
           </button>
         </div>
       </form>
