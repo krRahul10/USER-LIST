@@ -47,7 +47,7 @@ export const Register = () => {
 
     } else {
 
-      // alert("data added successfully");
+      alert("data added successfully");
       console.log("data added");
       navigate('/')
 
