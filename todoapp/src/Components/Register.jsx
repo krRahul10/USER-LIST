@@ -38,7 +38,7 @@ export const Register = () => {
     const data = await res.json();
     console.log("data with frontend", data);
 
-    if (data.status === 404 || !data) {
+    if (data.status === 422 || !data) {
 
       console.log("error");
       alert("error");

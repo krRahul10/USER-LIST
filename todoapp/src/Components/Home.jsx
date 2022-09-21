@@ -16,17 +16,19 @@ export const Home = () => {
   // data fetch yaha hoga se backend
   const getdata = async () => {
     const res = await fetch("/getdata", {
+
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+
     });
 
     const data = await res.json();
 
     console.log("data with frontend", data);
 
-    if (data.status === 404 || !data) {
+    if (data.status === 422 || !data) {
       console.log("error");
       alert("error");
     } else {
@@ -69,9 +71,10 @@ export const Home = () => {
                 <td>{elem.work}</td>
                 <td>{elem.phone}</td>
                 <td className="d-flex justify-content-around">
-                  <button className="btn btn-success">
+                  <NavLink to={`view/${elem._id}`}><button className="btn btn-success">
                     <RemoveRedEyeIcon />
-                  </button>
+                  </button></NavLink>
+                  
                   <button className="btn btn-primary">
                     <BorderColorIcon />
                   </button>

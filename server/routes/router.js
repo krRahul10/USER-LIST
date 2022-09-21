@@ -2,10 +2,6 @@ const express = require("express");
 const users = require("../models/userSchema");
 const router = express.Router();
 
-// router.get("/", (req,res) => {
-//     console.log('connect')
-// })
-
 // 1*****************Register Request*********
 
 router.post("/register", async (req, res) => {
@@ -13,27 +9,34 @@ router.post("/register", async (req, res) => {
   const { name, email, age, phone, work, add, desc } = req.body;
 
   if (!name || !email || !age || !phone || !work || !add || !desc) {
-    return res.status(404).json({error: "Please fill the data"});
+    return res.status(422).json({ error: "Please fill the data" });
   }
 
   try {
     const preuser = await users.findOne({ email: email });
+
     console.log(preuser);
 
     if (preuser) {
-      return res.status(404).json({error: "This user is already present"});
+      return res.status(422).json({ error: "This user is already present" });
     } else {
       const adduser = new users({
-        name, email, age, phone, work, add, desc,
+        name,
+        email,
+        age,
+        phone,
+        work,
+        add,
+        desc,
       });
 
       await adduser.save();
-      res.status(201).json({ message: "user store successfully"});
+      res.status(201).json({ message: "user store successfully" });
       console.log(adduser);
     }
   } catch (err) {
-    // res.status(404).json(error);
-    console.log("err",err)
+    // res.status(422).json(error);
+    console.log("err", err);
   }
 });
 
@@ -41,15 +44,29 @@ router.post("/register", async (req, res) => {
 
 router.get("/getdata", async (req, res) => {
   try {
-
     const userdata = await users.find();
     res.status(201).json(userdata);
     console.log(userdata);
-
   } catch (error) {
+    res.status(422).json(error);
+  }
+});
 
-    res.status(404).json(error);
+// 3****** get Individual user router
 
+router.get("/getuser/:id", async (req, res) => {
+  try {
+    console.log(req.params);
+
+    const { id } = req.params
+    const userindividual = await users.findById({_id: id})
+
+    console.log(userindividual)
+    res.status(201).json(userindividual)
+
+  } catch (err) {
+    console.log(err);
+    res.status(422).json(err)
   }
 });
 
